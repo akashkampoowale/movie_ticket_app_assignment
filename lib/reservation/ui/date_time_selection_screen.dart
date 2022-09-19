@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movie_ticket_app/common/appbar/app_bar.dart';
 import 'package:movie_ticket_app/common/custom_widgets/reservation_button.dart';
+import 'package:movie_ticket_app/common/resource/colors.dart';
 import 'package:movie_ticket_app/common/resource/gradients.dart';
 import 'package:movie_ticket_app/common/resource/paths.dart';
 import 'package:movie_ticket_app/common/resource/text_styles.dart';
@@ -14,7 +15,13 @@ class DateTimeSelectionScreen extends StatelessWidget {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: const PreferredSize(
-          preferredSize: Size.fromHeight(100), child: DefaultAppBar()),
+        preferredSize: Size.fromHeight(100),
+        child: DefaultAppBar(
+          appBarOptionBtnColor: circularBtnColor2,
+          appBarBackBtnColor: circularBtnColor1,
+          appBarOptionIcon: Icon(Icons.keyboard_control),
+        ),
+      ),
       body: Container(
         width: double.infinity,
         decoration: const BoxDecoration(

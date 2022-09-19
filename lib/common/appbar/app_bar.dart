@@ -1,11 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:movie_ticket_app/common/resource/colors.dart';
 import 'package:movie_ticket_app/common/resource/decorations.dart';
 import 'package:movie_ticket_app/common/resource/text_styles.dart';
 
 class DefaultAppBar extends StatelessWidget {
   final String appBarTitle;
-  const DefaultAppBar({Key? key, this.appBarTitle = ''}) : super(key: key);
+  final Color appBarBackBtnColor;
+  final Color appBarOptionBtnColor;
+  final Icon appBarOptionIcon;
+
+  const DefaultAppBar({
+    Key? key,
+    this.appBarTitle = '',
+    required this.appBarBackBtnColor,
+    required this.appBarOptionBtnColor,
+    required this.appBarOptionIcon,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,18 +26,26 @@ class DefaultAppBar extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Container(
-              padding: const EdgeInsets.all(10),
-              decoration: circularBtnDecoration1,
-              child: const Icon(Icons.arrow_back),
+            InkWell(
+              onTap: () {
+                Navigator.pop(context);
+              },
+              child: Container(
+                padding: const EdgeInsets.all(10),
+                decoration:
+                    circularBtnDecoration1.copyWith(color: appBarBackBtnColor),
+                child: const Icon(Icons.arrow_back),
+              ),
             ),
-
-            Text(appBarTitle,style: textStyleTitle2.copyWith(color: Colors.white),),
-
+            Text(
+              appBarTitle,
+              style: textStyleTitle2.copyWith(color: Colors.white),
+            ),
             Container(
               padding: const EdgeInsets.all(10),
-              decoration: circularBtnDecoration1.copyWith(color: circularBtnColor2),
-              child: const Icon(Icons.keyboard_control_sharp),
+              decoration:
+                  circularBtnDecoration1.copyWith(color: appBarOptionBtnColor),
+              child: appBarOptionIcon,
             ),
           ],
         ),

@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
-import 'package:movie_ticket_app/reservation/date_time_selection_screen.dart';
-import 'package:movie_ticket_app/reservation/seat_selection.dart';
+import 'package:movie_ticket_app/reservation/ui/date_time_selection_screen.dart';
+import 'package:movie_ticket_app/reservation/ui/seat_selection.dart';
 
 
 navigation (route,context){

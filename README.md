@@ -1,16 +1,20 @@
 # movie_ticket_app
 
-A new Flutter project.
+Packaging
+- have created packages by features.
 
-## Getting Started
+Date time selection screen
+- the screen shows the available slots for the movie.
+- you can also navigate to seat selection screen from here.
 
-This project is a starting point for a Flutter application.
+Seat selection screen
+- this allows the user to select the vacant seats
+- selected seats will get highlighted and user can also deselect the selected seat
+- created extension function on Seat class to change the seat color
 
-A few resources to get you started if this is your first Flutter project:
+Resources directory
+- have created resources like color,decoration,gradients,textStyle etc.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Common widgets
+- created custom appbar
+- created reservation button which can be used anywhere inside app.

@@ -11,4 +11,5 @@ const circularBtnColor2 = Color(0xffC882B8);
 const seatSelectionScreenBgColor = Color(0xff180D39);
 const selectedSeatColor = Color(0xff09FBD3);
 const alreadySelectedSeatColor = Color(0xffB6116B);
+const seatSelectionScreenBtnColor = Color(0xff49357A);
 
