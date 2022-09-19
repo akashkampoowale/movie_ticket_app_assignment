@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movie_ticket_app/common/navigation/navigation.dart';
 import 'package:movie_ticket_app/common/resource/gradients.dart';
 import 'package:movie_ticket_app/common/resource/text_styles.dart';
 
@@ -14,24 +15,29 @@ class ReservationButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        gradient: reservationBtnGradient,
-        borderRadius: BorderRadius.circular(20),
-      ),
-
-      //reservation btn text
-      child: Padding(
-        padding: const EdgeInsets.only(
-          left: 124,
-          right: 124,
-          top: 17,
-          bottom: 17,
+    return InkWell(
+      onTap: (){
+        navigation('seat_selection', context);
+      },
+      child: Container(
+        decoration: BoxDecoration(
+          gradient: reservationBtnGradient,
+          borderRadius: BorderRadius.circular(20),
         ),
-        child: Text(
-          buttonText,
-          style: textStyleBtnLabel1,
-          textAlign: TextAlign.center,
+
+        //reservation btn text
+        child: Padding(
+          padding: const EdgeInsets.only(
+            left: 124,
+            right: 124,
+            top: 17,
+            bottom: 17,
+          ),
+          child: Text(
+            buttonText,
+            style: textStyleBtnLabel1,
+            textAlign: TextAlign.center,
+          ),
         ),
       ),
     );

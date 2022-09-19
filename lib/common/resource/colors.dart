@@ -8,3 +8,4 @@ const reservationBtnGradient2Color = Color(0xff3B1578);
 const selectDayTextColor = Color(0xffBCB1CF);
 const circularBtnColor1 = Color(0xff7D61A3);
 const circularBtnColor2 = Color(0xffC882B8);
+const seatSelectionScreenBgColor = Color(0xff180D39);
