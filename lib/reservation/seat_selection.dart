@@ -3,6 +3,7 @@ import 'package:movie_ticket_app/common/appbar/app_bar.dart';
 import 'package:movie_ticket_app/common/extensions/seat_extensions.dart';
 import 'package:movie_ticket_app/common/resource/colors.dart';
 import 'package:movie_ticket_app/common/resource/paths.dart';
+import 'package:movie_ticket_app/common/resource/text_styles.dart';
 import 'package:movie_ticket_app/reservation/modal/seat.dart';
 
 class SeatSelectionScreen extends StatelessWidget {
@@ -49,22 +50,55 @@ class _SeatsSelection extends StatelessWidget {
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.only(left: 38,top:68,right: 38,),
+          padding: const EdgeInsets.only(left: 38,top:48,right: 38,),
           child: _SeatRows(leftSeats: silverSeatsA, rightSeats: silverSeatsB,),
         ),
         Padding(
           padding: const EdgeInsets.only(left: 18,right: 18),
           child: _SeatRows(leftSeats: silverSeatsC, rightSeats: silverSeatsD,),
         ),
-        const SizedBox(height: 42,),
+        const SizedBox(height: 32,),
         _SeatRow(seats: goldSeatsA),
         _SeatRow(seats: platinumSeatsA),
         _SeatRow(seats: platinumSeatsB),
         _SeatRow(seats: platinumSeatsC),
+        const SizedBox(height: 16,),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: const [
+            SeatSelectionTypeIndicator(iconColor: Colors.white,indicatorText: 'Available',),
+            SeatSelectionTypeIndicator(iconColor: alreadySelectedSeatColor,indicatorText: 'Reserved',),
+            SeatSelectionTypeIndicator(iconColor: selectedSeatColor,indicatorText: 'Selected',),
+          ],
+        ),
       ],
     );
   }
 }
+
+
+
+
+class SeatSelectionTypeIndicator extends StatelessWidget {
+  final Color iconColor;
+  final String indicatorText;
+  const SeatSelectionTypeIndicator({Key? key,required this.iconColor,required this.indicatorText}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children:  [
+        Icon(Icons.circle,color: iconColor,size: 8,),
+        const SizedBox(width: 10,),
+        Text(indicatorText,style: textStyleBtnLabel1,),
+      ],
+    );
+  }
+}
+
+
+
+
 
 class _SeatRow extends StatefulWidget {
   final List<Seat> seats;
@@ -93,7 +127,7 @@ class _SeatRowState extends State<_SeatRow> {
 
           },
           child: SizedBox(
-                    width: 30,height: 25,
+                    width: 28,height: 22,
                     child: Image.asset('$imagesPath/seat.png',color: seat.getSeatColor(),),
           ),
         ),
