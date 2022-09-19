@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movie_ticket_app/common/appbar/app_bar.dart';
+import 'package:movie_ticket_app/common/extensions/seat_extensions.dart';
 import 'package:movie_ticket_app/common/resource/colors.dart';
 import 'package:movie_ticket_app/common/resource/paths.dart';
 import 'package:movie_ticket_app/reservation/modal/seat.dart';
@@ -18,7 +19,7 @@ class SeatSelectionScreen extends StatelessWidget {
       body: Container(
         width: double.infinity,
         height: double.infinity,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           color: seatSelectionScreenBgColor,
         ),
 
@@ -48,15 +49,18 @@ class _SeatsSelection extends StatelessWidget {
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.only(left: 38,top: 68,right: 38,bottom: 10),
-          child: Row(
-            children: [
-              _SeatRow(seats: silverSeatsA),
-              const Spacer(),
-              _SeatRow(seats: silverSeatsB),
-            ],
-          ),
+          padding: const EdgeInsets.only(left: 38,top:68,right: 38,),
+          child: _SeatRows(leftSeats: silverSeatsA, rightSeats: silverSeatsB,),
         ),
+        Padding(
+          padding: const EdgeInsets.only(left: 18,right: 18),
+          child: _SeatRows(leftSeats: silverSeatsC, rightSeats: silverSeatsD,),
+        ),
+        const SizedBox(height: 42,),
+        _SeatRow(seats: goldSeatsA),
+        _SeatRow(seats: platinumSeatsA),
+        _SeatRow(seats: platinumSeatsB),
+        _SeatRow(seats: platinumSeatsC),
       ],
     );
   }
@@ -71,19 +75,14 @@ class _SeatRow extends StatefulWidget {
 }
 
 class _SeatRowState extends State<_SeatRow> {
-  String _getSeat(Seat seat){
-      if(seat.isSelected == true){
-        return '/reserved_seat.png';
-      }
-      return '/vacant_seat.png';
-  }
+
 
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: widget.seats.map((seat) => Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.only(left: 4,right: 4,top: 20,bottom: 10,),
         child: InkWell(
           onTap: (){
             if(seat.isAlreadySelected == false){
@@ -94,8 +93,8 @@ class _SeatRowState extends State<_SeatRow> {
 
           },
           child: SizedBox(
-                    width: 30,height: 20,
-                    child: Image.asset('$imagesPath${_getSeat(seat)}'),
+                    width: 30,height: 25,
+                    child: Image.asset('$imagesPath/seat.png',color: seat.getSeatColor(),),
           ),
         ),
       )).toList(),
@@ -103,6 +102,26 @@ class _SeatRowState extends State<_SeatRow> {
   }
 }
 
+
+class _SeatRows extends StatelessWidget {
+
+  final List<Seat> leftSeats;
+  final List<Seat> rightSeats;
+
+  const _SeatRows({Key? key, required this.leftSeats,required this.rightSeats,}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+
+    return Row(
+      children: [
+        _SeatRow(seats: leftSeats),
+        const Spacer(),
+        _SeatRow(seats: rightSeats),
+      ],
+    );
+  }
+}
 
 
 
