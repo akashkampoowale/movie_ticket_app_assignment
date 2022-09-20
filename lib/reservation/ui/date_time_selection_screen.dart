@@ -6,6 +6,7 @@ import 'package:movie_ticket_app/common/resource/gradients.dart';
 import 'package:movie_ticket_app/common/resource/paths.dart';
 import 'package:movie_ticket_app/common/resource/text_styles.dart';
 import 'package:movie_ticket_app/reservation/ui/date_time_button.dart';
+import 'package:readmore/readmore.dart';
 
 class DateTimeSelectionScreen extends StatelessWidget {
   const DateTimeSelectionScreen({Key? key}) : super(key: key);
@@ -59,12 +60,28 @@ class DateTimeSelectionScreen extends StatelessWidget {
                     const SizedBox(
                       height: 30,
                     ),
-                    Text(
-                      'Dr. Stephen Strange casts a forbidden spell that opens the doorway to the multiverse',
+                    // Text(
+                    //   'Dr. Stephen Strange casts a forbidden spell that opens the doorway to the multiverse',
+                    //   style: textStyleTitle2.copyWith(
+                    //     fontSize: 16,
+                    //   ),
+                    //   textAlign: TextAlign.center,
+                    // ),
+                    ReadMoreText(
+                      'Dr. Stephen Strange casts a forbidden spell that opens the doorway to the multiverse, including a alternate versions of himself, whose threat to humanity is too great for the combined forces of Strange, Wong, and Wanda Maximoff.',
+                      trimLines: 2,
+                      trimMode: TrimMode.Line,
+                      trimCollapsedText: 'Read more',
+                      trimExpandedText: 'Show less',
+                      moreStyle: textStyleTitle2.copyWith(
+                        fontSize: 16,
+                      ),
+                      lessStyle: textStyleTitle2.copyWith(
+                        fontSize: 16,
+                      ),
                       style: textStyleTitle2.copyWith(
                         fontSize: 16,
                       ),
-                      textAlign: TextAlign.center,
                     ),
                     const SizedBox(
                       height: 30,
@@ -95,59 +112,33 @@ class DateTimeSelectionScreen extends StatelessWidget {
   }
 }
 
-class _ReservationDateTimeButtons extends StatelessWidget {
+class _ReservationDateTimeButtons extends StatefulWidget {
   const _ReservationDateTimeButtons({Key? key}) : super(key: key);
 
   @override
+  State<_ReservationDateTimeButtons> createState() => _ReservationDateTimeButtonsState();
+}
+
+class _ReservationDateTimeButtonsState extends State<_ReservationDateTimeButtons> {
+  @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: const [
-        DateTimeButton(
-          day: 'Fri',
-          time: '3:00',
-          date: '5',
-        ),
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: availableDates
+          .map(
+            (dateTimeDetails) => DateTimeButton(
+              dateTimeDetails: dateTimeDetails,
+              onDateTimeSelected: (selectedDateTime) {
+                final previouslySelectedDateTimeDetails = availableDates.firstWhere((dateTimeDetails) => dateTimeDetails.isSelected == true);
 
-        //Here is the new container
-
-        DateTimeButton(
-          day: 'Sat',
-          time: '4:00',
-          date: '6',
-          bottomPadding: 40,
-        ),
-
-        //Her is new container
-
-        DateTimeButton(
-          day: 'Sun',
-          time: '5:00',
-          date: '7',
-          bottomPadding: 60,
-          width: 65,
-          cardTopPadding: 26,
-          cardBottomPadding: 26,
-          dateTimePickerGradient: reservationBtnGradient,
-        ),
-
-        //here is new container
-
-        DateTimeButton(
-          day: 'Mon',
-          time: '6:00',
-          date: '8',
-          bottomPadding: 40,
-        ),
-
-        //here is new container
-
-        DateTimeButton(
-          day: 'Tue',
-          time: '7:00',
-          date: '9',
-        ),
-      ],
+                setState(() {
+                  previouslySelectedDateTimeDetails.isSelected = false;
+                  selectedDateTime.isSelected = true;
+                });
+                },
+            ),
+          )
+          .toList(),
     );
   }
 }
